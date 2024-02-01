@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "TV SHOW EXTENSION",
+  "version": "1.0",
+  "description": "Searching for all your favourite TV shows",
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "action": {
+    "default_icon": "icon.png",
+    "default_title": "TV SHOW extension",
+    "default_popup": "popup/popup.html"
+  },
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "alarms",
+    "notifications",
+    "tabs",
+    "search"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
