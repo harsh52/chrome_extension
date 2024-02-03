@@ -1,0 +1,24 @@
+{
+  "name": "Inclusive Word Checker",
+  "description": "Scan page for inclusive words and mark them with red underline.",
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Inclusive Word Checker",
+    "default_icon": "icon.png"
+  },
+  "permissions": ["storage", "activeTab", "tabs", "contextMenus"],
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["contentScript.js"]
+    }
+  ]
+}
