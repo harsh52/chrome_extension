@@ -1,0 +1,7 @@
+match_1:
+  - regex: \bh[aeiou]+p[pn]y\b
+  - inclusive_word: happy
+
+match_2:
+  - regex: \bsad\b
+  - inclusive_word: sad

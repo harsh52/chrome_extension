@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import ReactDOM from "react-dom"
 // import { TextField, Button, Container, Typography } from "@mui/material"
-import { getAlternativeWords, WordMap } from "../utils/helper"
+import { getAlternativeWords, WordMap, findMatchingWord } from "../utils/helper"
 import {
   TextareaAutosize,
   Button,
@@ -87,12 +87,17 @@ const App: React.FC<{}> = () => {
   }
 
   const inclusiveWordDetector = (inputWord: string) => {
-    const alternativeWords = getAlternativeWords(inputWord)
-    console.log(`alternativeWords ${alternativeWords}`)
-
-    if (alternativeWords) {
-      console.log(`Alternatives: ${alternativeWords}`)
-      addWord(inputWord, alternativeWords)
+    const individualWords = inputWord.split(" ")
+    for (const word of individualWords) {
+      findMatchingWord(word).then((inclusive_word) => {
+        console.log(`inclusive_word: ${inclusive_word}`)
+        const alternativeWords = getAlternativeWords(inclusive_word) // calling matches.yaml
+        console.log(`alternativeWords ${alternativeWords}`)
+        if (alternativeWords) {
+          console.log(`Alternatives: ${alternativeWords}`)
+          addWord(word, alternativeWords)
+        }
+      })
     }
   }
 
