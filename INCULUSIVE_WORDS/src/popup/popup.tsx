@@ -153,11 +153,11 @@ const App: React.FC<{}> = () => {
         value={inputValue}
         onChange={handleInputChange}
       />
-      <div
+      {/* <div
         dangerouslySetInnerHTML={{
           __html: getHighlightedText(inputValue, inclusiveWords, classes),
         }}
-      />
+      /> */}
       <Button
         variant='contained'
         color='primary'
