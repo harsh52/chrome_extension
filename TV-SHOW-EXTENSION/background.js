@@ -3,15 +3,15 @@ chrome.runtime.onInstalled.addListener((details) => {
     title: "Test context menu",
     id: "contextmenu1",
     contexts: ["page", "selection"],
-  });
-});
+  })
+})
 
 chrome.contextMenus.onClicked.addListener((event) => {
-  console.log(event);
+  console.log(event)
   chrome.search.query({
     disposition: "NEW_TAB",
     text: event.selectionText,
-  });
-});
+  })
+})
 
-console.log("background script running");
+console.log("background script running")
