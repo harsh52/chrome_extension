@@ -1,6 +1,6 @@
 {
   "name": "Inclusive Word Checker",
-  "description": "Scan page for inclusive words and mark them with red underline.",
+  "description": "Scan page for inclusive words and mark the inclusive words",
   "version": "1.0.0",
   "manifest_version": 3,
   "icons": {
