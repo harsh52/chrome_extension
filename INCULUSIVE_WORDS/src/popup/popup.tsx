@@ -108,7 +108,7 @@ const App: React.FC<{}> = () => {
   const handleSubmit = () => {
     console.log("Submitted:", inputValue)
     // Implement your submit logic here
-    inclusiveWordDetector(inputValue)
+    inclusiveWordDetector(inputValue.toLowerCase())
   }
 
   const getHighlightedText = (
