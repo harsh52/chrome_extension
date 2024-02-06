@@ -4,11 +4,18 @@ import "./popup.css"
 import WeatherCard from "./WeatherCard"
 import { Box, Grid, IconButton, InputBase, Paper } from "@material-ui/core"
 import { Add as AddIcon } from "@material-ui/icons"
-import { getStoredCities, setStoredCities } from "../utils/storage"
+import {
+  getStoredCities,
+  setStoredCities,
+  setStoredOptions,
+  getStoredOptions,
+  LocalStorageOptions,
+} from "../utils/storage"
 
 const App: React.FC<{}> = () => {
   useEffect(() => {
     getStoredCities().then((cities) => setcities(cities))
+    getStoredOptions().then((options) => setOptions(options))
   }, [])
 
   const [cities, setcities] = useState<string[]>([
@@ -17,6 +24,7 @@ const App: React.FC<{}> = () => {
     "error",
   ])
   const [cityInput, setcityInput] = useState("")
+  const [options, setOptions] = useState<LocalStorageOptions | null>(null)
 
   const handleCityButtonClick = () => {
     if (cityInput === "") {
@@ -37,9 +45,23 @@ const App: React.FC<{}> = () => {
     })
   }
 
+  const handleTempScaleButtonClick = () => {
+    const updateOptions: LocalStorageOptions = {
+      ...options,
+      tempScale: options.tempScale === "metric" ? "imperial" : "metric",
+    }
+    setStoredOptions(updateOptions).then(() => {
+      setOptions(updateOptions)
+    })
+  }
+
+  if (!options) {
+    return null
+  }
+
   return (
     <Box mx='8px' my='16px'>
-      <Grid container>
+      <Grid container justifyContent='space-evenly'>
         <Grid item>
           <Paper>
             <Box px='15px' py='5px'>
@@ -54,11 +76,21 @@ const App: React.FC<{}> = () => {
             </Box>
           </Paper>
         </Grid>
+        <Grid item>
+          <Paper>
+            <Box>
+              <IconButton onClick={handleTempScaleButtonClick}>
+                {options.tempScale === "metric" ? "\u2103" : "\u2109"}
+              </IconButton>
+            </Box>
+          </Paper>
+        </Grid>
       </Grid>
       {cities.map((city, index) => (
         <WeatherCard
           city={city}
           key={index}
+          tempScale={options.tempScale}
           onDelete={() => handleCityDeleteButtonClick(index)}
         />
       ))}
